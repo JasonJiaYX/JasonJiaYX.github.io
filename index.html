@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>贾钧麟 | AI 猎头顾问</title>
+  <style>
+    /* ===== 全局变量 & 重置 ===== */
+    :root {
+      --navy: #0d1b2a;
+      --navy-mid: #1b2d42;
+      --gold: #c8973a;
+      --gold-light: #e0b96a;
+      --white: #ffffff;
+      --gray-light: #f5f6f8;
+      --gray-text: #6b7280;
+      --border: #e5e7eb;
+      --shadow: 0 4px 24px rgba(13,27,42,0.10);
+      --radius: 12px;
+      --transition: 0.3s ease;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', sans-serif;
+      color: var(--navy);
+      background: var(--white);
+      line-height: 1.7;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ===== 导航栏 ===== */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(13,27,42,0.96);
+      backdrop-filter: blur(8px);
+      padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+      transition: box-shadow var(--transition);
+    }
+    #navbar.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
+    .nav-logo {
+      font-size: 1.2rem; font-weight: 700;
+      color: var(--gold); letter-spacing: 1px;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.85); font-size: 0.9rem;
+      transition: color var(--transition); position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 2px; background: var(--gold);
+      transition: width var(--transition);
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      background: var(--gold); color: var(--navy) !important;
+      padding: 0.5rem 1.2rem; border-radius: 6px;
+      font-weight: 600; transition: background var(--transition) !important;
+    }
+    .nav-cta:hover { background: var(--gold-light) !important; }
+    .nav-cta::after { display: none !important; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: all var(--transition); }
+
+    /* ===== Hero 区域 ===== */
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #1e3a5f 100%);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      padding: 100px 5% 60px;
+    }
+    #hero::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8973a' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.6;
+    }
+    .hero-inner {
+      max-width: 1100px; width: 100%;
+      display: flex; align-items: center; gap: 4rem;
+      position: relative; z-index: 1;
+    }
+    .hero-text { flex: 1; }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(200,151,58,0.15); border: 1px solid rgba(200,151,58,0.4);
+      color: var(--gold); font-size: 0.82rem; font-weight: 600;
+      padding: 0.35rem 1rem; border-radius: 50px; letter-spacing: 1.5px;
+      text-transform: uppercase; margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 800; color: var(--white);
+      line-height: 1.2; margin-bottom: 0.5rem;
+    }
+    .hero-title span { color: var(--gold); }
+    .hero-subtitle {
+      font-size: 1.1rem; color: rgba(255,255,255,0.7);
+      margin-bottom: 2rem; max-width: 480px;
+    }
+    .hero-stats {
+      display: flex; gap: 2.5rem; margin-bottom: 2.5rem;
+    }
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-size: 2rem; font-weight: 800; color: var(--gold);
+      line-height: 1;
+    }
+    .stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.6); margin-top: 0.2rem; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--gold); color: var(--navy);
+      padding: 0.85rem 2rem; border-radius: 8px;
+      font-weight: 700; font-size: 0.95rem;
+      transition: background var(--transition), transform var(--transition);
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-outline {
+      border: 2px solid rgba(255,255,255,0.4); color: var(--white);
+      padding: 0.85rem 2rem; border-radius: 8px;
+      font-weight: 600; font-size: 0.95rem;
+      transition: all var(--transition); display: inline-block;
+    }
+    .btn-outline:hover {
+      border-color: var(--gold); color: var(--gold);
+      transform: translateY(-2px);
+    }
+    .hero-avatar {
+      flex-shrink: 0;
+      width: 280px; height: 280px;
+      border-radius: 50%;
+      border: 4px solid var(--gold);
+      background: var(--navy-mid);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 7rem;
+      box-shadow: 0 0 60px rgba(200,151,58,0.2);
+      position: relative;
+    }
+    .hero-avatar::after {
+      content: '';
+      position: absolute; inset: -12px;
+      border-radius: 50%;
+      border: 1px dashed rgba(200,151,58,0.3);
+      animation: spin 20s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ===== 通用 Section 样式 ===== */
+    section { padding: 90px 5%; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-tag {
+      display: inline-block;
+      color: var(--gold); font-size: 0.8rem; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-weight: 800; line-height: 1.25;
+      margin-bottom: 1rem;
+    }
+    .section-desc {
+      color: var(--gray-text); font-size: 1rem;
+      max-width: 580px; margin-bottom: 3rem;
+    }
+    .divider {
+      width: 48px; height: 4px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      border-radius: 2px; margin: 1rem 0 1.5rem;
+    }
+
+    /* ===== 关于我 ===== */
+    #about { background: var(--gray-light); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center;
+    }
+    .about-img-block {
+      position: relative;
+    }
+    .about-img-placeholder {
+      width: 100%; aspect-ratio: 4/5;
+      background: linear-gradient(145deg, var(--navy) 0%, var(--navy-mid) 100%);
+      border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 6rem;
+      color: var(--gold); opacity: 0.9;
+      box-shadow: var(--shadow);
+    }
+    .about-card {
+      position: absolute; bottom: -20px; right: -20px;
+      background: var(--gold); color: var(--navy);
+      border-radius: var(--radius); padding: 1.2rem 1.5rem;
+      font-weight: 700; text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .about-card .big { font-size: 2.5rem; line-height: 1; }
+    .about-card .small { font-size: 0.8rem; }
+    .expertise-list { list-style: none; margin-top: 1.5rem; }
+    .expertise-list li {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0.6rem 0; border-bottom: 1px solid var(--border);
+      font-size: 0.95rem; color: var(--navy-mid);
+    }
+    .expertise-list li:last-child { border-bottom: none; }
+    .check {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: rgba(200,151,58,0.12); color: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; flex-shrink: 0;
+    }
+
+    /* ===== 服务 ===== */
+    #services { background: var(--white); }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+    }
+    .service-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem 1.8rem;
+      transition: all var(--transition);
+      cursor: default;
+      position: relative; overflow: hidden;
+    }
+    .service-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px; background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform var(--transition);
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow);
+      border-color: transparent;
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon {
+      font-size: 2.5rem; margin-bottom: 1.2rem; display: block;
+    }
+    .service-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .service-desc { font-size: 0.88rem; color: var(--gray-text); line-height: 1.7; }
+
+    /* ===== 成功案例 ===== */
+    #cases { background: var(--navy); }
+    #cases .section-title { color: var(--white); }
+    #cases .section-tag { color: var(--gold-light); }
+    #cases .section-desc { color: rgba(255,255,255,0.6); }
+    .cases-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+    }
+    .case-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 1.8rem;
+      transition: all var(--transition);
+    }
+    .case-card:hover {
+      background: rgba(255,255,255,0.09);
+      border-color: rgba(200,151,58,0.4);
+      transform: translateY(-4px);
+    }
+    .case-industry {
+      display: inline-block;
+      background: rgba(200,151,58,0.15); color: var(--gold);
+      font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.8rem;
+      border-radius: 50px; margin-bottom: 1rem;
+    }
+    .case-role {
+      font-size: 1.05rem; font-weight: 700; color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+    .case-company { font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-bottom: 1rem; }
+    .case-meta {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+    }
+    .case-tag {
+      background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.7);
+      font-size: 0.78rem; padding: 0.2rem 0.7rem; border-radius: 4px;
+    }
+    .cases-summary {
+      margin-top: 3rem;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem; text-align: center;
+    }
+    .summary-item { padding: 1.5rem; }
+    .summary-num {
+      font-size: 2.5rem; font-weight: 800; color: var(--gold); display: block;
+    }
+    .summary-label { font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-top: 0.3rem; }
+
+    /* ===== 联系我 ===== */
+    #contact { background: var(--gray-light); }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: start;
+    }
+    .contact-info-list { list-style: none; margin-top: 2rem; }
+    .contact-info-list li {
+      display: flex; align-items: flex-start; gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .contact-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      background: var(--gold); color: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .contact-detail strong { display: block; font-size: 0.85rem; color: var(--gray-text); }
+    .contact-detail span { font-size: 1rem; font-weight: 600; color: var(--navy); }
+    .contact-form {
+      background: var(--white); border-radius: var(--radius);
+      padding: 2.5rem; box-shadow: var(--shadow);
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label {
+      display: block; font-size: 0.85rem; font-weight: 600;
+      color: var(--navy); margin-bottom: 0.4rem;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%; padding: 0.75rem 1rem;
+      border: 1.5px solid var(--border); border-radius: 8px;
+      font-size: 0.95rem; font-family: inherit;
+      color: var(--navy); background: var(--white);
+      transition: border-color var(--transition), box-shadow var(--transition);
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(200,151,58,0.12);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .btn-submit {
+      width: 100%; background: var(--navy);
+      color: var(--white); border: none; cursor: pointer;
+      padding: 0.9rem 2rem; border-radius: 8px;
+      font-size: 1rem; font-weight: 700; font-family: inherit;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .btn-submit:hover { background: var(--navy-mid); transform: translateY(-2px); }
+    .form-success {
+      display: none; text-align: center; padding: 2rem;
+      color: #16a34a; font-weight: 600;
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      background: var(--navy); color: rgba(255,255,255,0.5);
+      text-align: center; padding: 2rem 5%;
+      font-size: 0.85rem;
+    }
+    footer span { color: var(--gold); }
+
+    /* ===== 响应式 ===== */
+    @media (max-width: 900px) {
+      .hero-inner { flex-direction: column-reverse; text-align: center; gap: 2rem; }
+      .hero-stats { justify-content: center; }
+      .hero-btns { justify-content: center; }
+      .hero-avatar { width: 200px; height: 200px; font-size: 5rem; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-img-block { display: none; }
+      .services-grid { grid-template-columns: 1fr; }
+      .cases-grid { grid-template-columns: 1fr; }
+      .cases-summary { grid-template-columns: repeat(2, 1fr); }
+      .contact-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: var(--navy); padding: 1rem 5% 2rem; gap: 1rem; }
+      .nav-links.open { display: flex; }
+      .hamburger { display: flex; }
+      section { padding: 60px 5%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== 导航 ===== -->
+<nav id="navbar">
+  <div class="nav-logo">Junlin Jia</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">关于我</a></li>
+    <li><a href="#services">服务</a></li>
+    <li><a href="#cases">成功案例</a></li>
+    <li><a href="#contact" class="nav-cta">立即咨询</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ===== Hero ===== -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge">AI Headhunter · Engineer &amp; VC Background</div>
+      <h1 class="hero-title">精准猎聘<br /><span>AI Infra 核心人才</span></h1>
+      <p class="hero-subtitle">
+        工程师出身 + VC 投资视角，深度聚焦 AI Infra 赛道，
+        帮 AI 公司找到真正懂技术、能落地的核心人才。
+      </p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">AI</div>
+          <div class="stat-label">深度垂直领域</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">工程师</div>
+          <div class="stat-label">技术出身背景</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">VC</div>
+          <div class="stat-label">投资视角加持</div>
+        </div>
+      </div>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-primary">免费咨询</a>
+        <a href="#cases" class="btn-outline">查看案例</a>
+      </div>
+    </div>
+    <div class="hero-avatar">👔</div>
+  </div>
+</section>
+
+<!-- ===== 关于我 ===== -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-img-block">
+        <div class="about-img-placeholder">👤</div>
+        <div class="about-card">
+          <div class="big" style="font-size:1.4rem;">工程师<br/>+ VC</div>
+          <div class="small">双重背景</div>
+        </div>
+      </div>
+      <div class="about-content">
+        <div class="section-tag">About Me</div>
+        <h2 class="section-title">AI 猎头顾问<br />贾钧麟</h2>
+        <div class="divider"></div>
+        <p style="color: var(--gray-text); margin-bottom: 1rem;">
+          工程师出身，拥有 VC 投资背景，深度聚焦 AI Infra 赛道人才猎聘。
+          凭借对技术栈的第一手理解与投资视角，能够精准评估候选人的真实能力与业务潜力，
+          帮助 AI 公司找到真正能推动产品落地的核心工程与研究人才。
+        </p>
+        <p style="color: var(--gray-text); margin-bottom: 1.5rem;">
+          服务城市覆盖<strong style="color:var(--gold)">北京 · 上海 · 杭州 · 深圳</strong>，
+          专注为 AI 初创公司、大模型团队及 AI Infra 平台提供核心岗位精准寻访服务。
+        </p>
+        <ul class="expertise-list">
+          <li><span class="check">✓</span>AI Infra（训练框架、推理引擎、MLOps、存储）</li>
+          <li><span class="check">✓</span>大模型研究与工程（Pre-training、RLHF、Fine-tuning）</li>
+          <li><span class="check">✓</span>AI 芯片与系统软件（Compiler、Driver、Runtime）</li>
+          <li><span class="check">✓</span>AI 应用层工程与产品（Agent、RAG、多模态）</li>
+          <li><span class="check">✓</span>AI 公司管理与商业化团队搭建</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 服务 ===== -->
+<section id="services">
+  <div class="section-inner">
+    <div class="section-tag">Services</div>
+    <h2 class="section-title">我的猎聘服务</h2>
+    <div class="divider"></div>
+    <p class="section-desc">
+      以工程师视角理解岗位，以 VC 视角判断候选人潜力，为 AI 公司提供精准、高效的人才解决方案。
+    </p>
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-icon">🤖</span>
+        <div class="service-title">AI Infra 精准猎聘</div>
+        <p class="service-desc">
+          深度聚焦训练框架、推理引擎、MLOps、分布式存储等 AI 基础设施岗位，
+          凭借技术背景精准评估候选人真实能力，拒绝简历注水。
+        </p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🧠</span>
+        <div class="service-title">大模型团队搭建</div>
+        <p class="service-desc">
+          为大模型初创公司提供从核心研究员到工程负责人的全栈团队组建服务，
+          助力团队从 0 到 1 快速成型。
+        </p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🔬</span>
+        <div class="service-title">研究型人才寻访</div>
+        <p class="service-desc">
+          专注顶尖高校及研究院（清北、CMU、MIT、Google Brain 等）研究人才寻访，
+          帮助企业引进具备前沿技术能力的核心研究员。
+        </p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">💡</span>
+        <div class="service-title">技术能力评估</div>
+        <p class="service-desc">
+          基于工程师背景，提供超越简历的候选人技术深度评估，
+          从系统设计、代码能力、论文理解等维度综合判断，降低用人风险。
+        </p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">📊</span>
+        <div class="service-title">AI 人才市场洞察</div>
+        <p class="service-desc">
+          提供 AI Infra 赛道薪酬基准、人才分布图谱及竞争对手团队结构分析，
+          助力企业制定科学的人才战略与薪酬策略。
+        </p>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🚀</span>
+        <div class="service-title">AI 候选人职业咨询</div>
+        <p class="service-desc">
+          为 AI 工程师与研究员提供市场定位、offer 选择及职业路径规划建议，
+          结合 VC 视角判断公司成长潜力，助力做出最优决策。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 成功案例 ===== -->
+<section id="cases">
+  <div class="section-inner">
+    <div class="section-tag">Success Cases</div>
+    <h2 class="section-title">专注猎聘的岗位领域</h2>
+    <div class="divider"></div>
+    <p class="section-desc">深度聚焦 AI Infra 全栈，覆盖从底层系统到应用层的核心技术与管理岗位</p>
+    <div class="cases-grid">
+      <div class="case-card">
+        <span class="case-industry">AI Infra · 训练</span>
+        <div class="case-role">分布式训练工程师 / 负责人</div>
+        <div class="case-company">大模型公司 · 北京 / 上海</div>
+        <div class="case-meta">
+          <span class="case-tag">PyTorch / Megatron</span>
+          <span class="case-tag">大规模集群调度</span>
+        </div>
+      </div>
+      <div class="case-card">
+        <span class="case-industry">AI Infra · 推理</span>
+        <div class="case-role">推理引擎工程师 / 架构师</div>
+        <div class="case-company">AI 芯片 / 云厂商 · 深圳 / 杭州</div>
+        <div class="case-meta">
+          <span class="case-tag">TensorRT / vLLM</span>
+          <span class="case-tag">量化 & 编译优化</span>
+        </div>
+      </div>
+      <div class="case-card">
+        <span class="case-industry">AI Infra · 系统</span>
+        <div class="case-role">AI 系统软件工程师</div>
+        <div class="case-company">AI 芯片公司 · 全国</div>
+        <div class="case-meta">
+          <span class="case-tag">Compiler / Runtime</span>
+          <span class="case-tag">CUDA / 异构计算</span>
+        </div>
+      </div>
+      <div class="case-card">
+        <span class="case-industry">大模型研究</span>
+        <div class="case-role">研究员 / 算法工程师</div>
+        <div class="case-company">顶尖 AI 实验室 · 北京 / 杭州</div>
+        <div class="case-meta">
+          <span class="case-tag">Pre-training / RLHF</span>
+          <span class="case-tag">顶会论文背景</span>
+        </div>
+      </div>
+      <div class="case-card">
+        <span class="case-industry">MLOps / 平台</span>
+        <div class="case-role">ML 平台工程师 / 负责人</div>
+        <div class="case-company">AI 独角兽 · 上海 / 深圳</div>
+        <div class="case-meta">
+          <span class="case-tag">训练平台 / 数据飞轮</span>
+          <span class="case-tag">Kubernetes / 存储</span>
+        </div>
+      </div>
+      <div class="case-card">
+        <span class="case-industry">AI 管理岗</span>
+        <div class="case-role">技术 VP / 工程 Director</div>
+        <div class="case-company">AI 初创 / 大厂 AI 部门 · 全国</div>
+        <div class="case-meta">
+          <span class="case-tag">技术 + 业务双驱动</span>
+          <span class="case-tag">团队从 0 到 1</span>
+        </div>
+      </div>
+    </div>
+    <div class="cases-summary">
+      <div class="summary-item">
+        <span class="summary-num">AI</span>
+        <div class="summary-label">深度垂直赛道</div>
+      </div>
+      <div class="summary-item">
+        <span class="summary-num">4城</span>
+        <div class="summary-label">北上杭深覆盖</div>
+      </div>
+      <div class="summary-item">
+        <span class="summary-num">工程师</span>
+        <div class="summary-label">技术背景评估</div>
+      </div>
+      <div class="summary-item">
+        <span class="summary-num">VC</span>
+        <div class="summary-label">投资视角加持</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 联系我 ===== -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div>
+        <div class="section-tag">Contact</div>
+        <h2 class="section-title">与我取得联系</h2>
+        <div class="divider"></div>
+        <p style="color: var(--gray-text); margin-bottom: 1.5rem;">
+          无论你是正在寻找关键人才的企业方，还是希望探索新机会的候选人，
+          欢迎与我沟通，我将在24小时内回复。
+        </p>
+        <ul class="contact-info-list">
+          <li>
+            <div class="contact-icon">📧</div>
+            <div class="contact-detail">
+              <strong>邮箱</strong>
+              <span>jiajunlin@feifanhexi.com</span>
+            </div>
+          </li>
+          <li>
+            <div class="contact-icon">📱</div>
+            <div class="contact-detail">
+              <strong>电话 / 微信</strong>
+              <span>+86 133-0124-1381</span>
+            </div>
+          </li>
+          <li>
+            <div class="contact-icon">📍</div>
+            <div class="contact-detail">
+              <strong>主要服务城市</strong>
+              <span>北京 · 上海 · 深圳 · 杭州</span>
+            </div>
+          </li>
+          <li>
+            <div class="contact-icon">💼</div>
+            <div class="contact-detail">
+              <strong>领英</strong>
+              <span><a href="https://www.linkedin.com/in/junlin-jia/" target="_blank" style="color:var(--navy);text-decoration:underline;">linkedin.com/in/junlin-jia</a></span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="contact-form">
+        <h3 style="margin-bottom: 1.5rem; font-size: 1.2rem;">发送消息</h3>
+        <form id="contactForm" onsubmit="submitForm(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>姓名 *</label>
+              <input type="text" placeholder="您的姓名" required />
+            </div>
+            <div class="form-group">
+              <label>公司</label>
+              <input type="text" placeholder="所在公司" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>联系方式 *</label>
+              <input type="text" placeholder="手机号 / 微信 / 邮箱" required />
+            </div>
+            <div class="form-group">
+              <label>身份</label>
+              <select>
+                <option value="">请选择</option>
+                <option>企业HR / 用人方</option>
+                <option>求职候选人</option>
+                <option>其他</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>留言内容 *</label>
+            <textarea placeholder="请描述您的招聘需求或求职意向..." required></textarea>
+          </div>
+          <button type="submit" class="btn-submit">提交咨询 →</button>
+        </form>
+        <div class="form-success" id="formSuccess">
+          ✅ 消息已发送！我将在24小时内与您联系。
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <p>© 2026 <span>贾钧麟 · Junlin Jia</span> · AI 猎头顾问 · 保密承诺 · 专业诚信</p>
+</footer>
+
+<script>
+  // 导航栏滚动效果
+  window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // 汉堡菜单
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  // 点击导航链接关闭菜单
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+
+  // 表单提交模拟
+  function submitForm(e) {
+    e.preventDefault();
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }
+
+  // 滚动进场动画
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.service-card, .case-card, .about-content, .contact-form').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
