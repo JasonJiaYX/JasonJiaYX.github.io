@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>贾钧麟 | AI 猎头顾问</title>
+  <title>贾钧麟 | Junlin Jia - 聚焦集成电路与 AI 的科技投资人</title>
   <style>
     /* ===== 全局变量 & 重置 ===== */
     :root {
@@ -387,6 +387,29 @@
       .hamburger { display: flex; }
       section { padding: 60px 5%; }
     }
+    
+    /* ===== 复制成功提示气泡 ===== */
+    .wechat-toast {
+      position: fixed;
+      bottom: 50px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--gold);
+      color: var(--navy);
+      padding: 0.8rem 1.6rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      box-shadow: 0 10px 30px rgba(200, 151, 58, 0.3);
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+    }
+    .wechat-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
   </style>
 </head>
 <body>
@@ -396,9 +419,9 @@
   <div class="nav-logo">Junlin Jia</div>
   <ul class="nav-links" id="navLinks">
     <li><a href="#about">关于我</a></li>
-    <li><a href="#services">服务</a></li>
-    <li><a href="#cases">成功案例</a></li>
-    <li><a href="#contact" class="nav-cta">立即咨询</a></li>
+    <li><a href="#tinker">折腾清单</a></li>
+    <li><a href="#topics">交流主题</a></li>
+    <li><a href="#contact" class="nav-cta">交个朋友</a></li>
   </ul>
   <div class="hamburger" id="hamburger" onclick="toggleMenu()">
     <span></span><span></span><span></span>
@@ -409,29 +432,28 @@
 <section id="hero">
   <div class="hero-inner">
     <div class="hero-text">
-      <div class="hero-badge">AI Headhunter · Engineer &amp; VC Background</div>
-      <h1 class="hero-title">精准猎聘<br /><span>AI Infra 核心人才</span></h1>
+      <div class="hero-badge">Investor · Tinkerer · Tech Explorer</div>
+      <h1 class="hero-title">共同探索<br /><span>集成电路与 AI </span>的硬核未来</h1>
       <p class="hero-subtitle">
-        工程师出身 + VC 投资视角，深度聚焦 AI Infra 赛道，
-        帮 AI 公司找到真正懂技术、能落地的核心人才。
+        前 VC 投资人，拥有深度的尽职调查内功。不爱套路，只爱硬核底层。在这里寻找志同道合的创业者与极客，一起交个朋友。
       </p>
       <div class="hero-stats">
         <div class="stat-item">
-          <div class="stat-num">AI</div>
-          <div class="stat-label">深度垂直领域</div>
+          <div class="stat-num">IC &amp; AI</div>
+          <div class="stat-label">垂直聚焦赛道</div>
         </div>
         <div class="stat-item">
-          <div class="stat-num">工程师</div>
-          <div class="stat-label">技术出身背景</div>
+          <div class="stat-num">Deep DD</div>
+          <div class="stat-label">深度尽调内功</div>
         </div>
         <div class="stat-item">
-          <div class="stat-num">VC</div>
-          <div class="stat-label">投资视角加持</div>
+          <div class="stat-num">喜欢折腾</div>
+          <div class="stat-label">拒绝空洞概念</div>
         </div>
       </div>
       <div class="hero-btns">
-        <a href="#contact" class="btn-primary">免费咨询</a>
-        <a href="#cases" class="btn-outline">查看案例</a>
+        <a href="#contact" class="btn-primary">交个朋友</a>
+        <a href="#topics" class="btn-outline">聊些什么</a>
       </div>
     </div>
     <div class="hero-avatar">
@@ -445,178 +467,168 @@
   <div class="section-inner">
     <div class="about-grid">
       <div class="about-img-block">
-        <div class="about-img-placeholder">👤</div>
+        <div class="about-img-placeholder">⚙️</div>
         <div class="about-card">
-          <div class="big" style="font-size:1.4rem;">工程师<br/>+ VC</div>
-          <div class="small">双重背景</div>
+          <div class="big" style="font-size:1.4rem;">VC 背景<br/>+ 极客魂</div>
+          <div class="small">硬核探索</div>
         </div>
       </div>
       <div class="about-content">
         <div class="section-tag">About Me</div>
-        <h2 class="section-title">AI 猎头顾问<br />贾钧麟</h2>
+        <h2 class="section-title">我是贾钧麟</h2>
         <div class="divider"></div>
         <p style="color: var(--gray-text); margin-bottom: 1rem;">
-          工程师出身，拥有 VC 投资背景，深度聚焦 AI Infra 赛道人才猎聘。
-          凭借对技术栈的第一手理解与投资视角，能够精准评估候选人的真实能力与业务潜力，
-          帮助 AI 公司找到真正能推动产品落地的核心工程与研究人才。
+          我做过 VC 投资，积累了深度的行业研究和尽职调查（Due Diligence）能力；同时，我骨子里是个“喜欢折腾”的人，热衷于钻研前沿技术和各种软硬件工具。
         </p>
         <p style="color: var(--gray-text); margin-bottom: 1.5rem;">
-          服务城市覆盖<strong style="color:var(--gold)">北京 · 上海 · 杭州 · 深圳</strong>，
-          专注为 AI 初创公司、大模型团队及 AI Infra 平台提供核心岗位精准寻访服务。
+          在集成电路（芯片）和人工智能（AI）加速演进的今天，行业充满机遇也夹杂着噪音。我希望能够链接那些不愿随波逐流、真正热爱技术的年轻创业者与极客伙伴，一起交流、合作、交个朋友。
         </p>
         <ul class="expertise-list">
-          <li><span class="check">✓</span>AI Infra（训练框架、推理引擎、MLOps、存储）</li>
-          <li><span class="check">✓</span>大模型研究与工程（Pre-training、RLHF、Fine-tuning）</li>
-          <li><span class="check">✓</span>AI 芯片与系统软件（Compiler、Driver、Runtime）</li>
-          <li><span class="check">✓</span>AI 应用层工程与产品（Agent、RAG、多模态）</li>
-          <li><span class="check">✓</span>AI 公司管理与商业化团队搭建</li>
+          <li><span class="check">✓</span><strong>硬核极客</strong>：喜欢折腾各种软硬件、端侧 AI、搞怪好玩的项目</li>
+          <li><span class="check">✓</span><strong>VC 投资视角</strong>：懂资本运作逻辑，擅长帮创业者梳理商业模式</li>
+          <li><span class="check">✓</span><strong>深度尽调内功</strong>：刨根问底，擅长做最真实的产业与技术草根调研</li>
+          <li><span class="check">✓</span><strong>常驻城市</strong>：主要在北京、上海、深圳、杭州与科技圈朋友们碰面</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== 服务 ===== -->
-<section id="services">
+<!-- ===== 我的“折腾”清单 ===== -->
+<section id="tinker">
   <div class="section-inner">
-    <div class="section-tag">Services</div>
-    <h2 class="section-title">我的猎聘服务</h2>
+    <div class="section-tag">Tinker List</div>
+    <h2 class="section-title">我的硬核“折腾”清单</h2>
     <div class="divider"></div>
     <p class="section-desc">
-      以工程师视角理解岗位，以 VC 视角判断候选人潜力，为 AI 公司提供精准、高效的人才解决方案。
+      我不爱扯空洞的宏大叙事，更喜欢研究具体的底层技术和实际的落地探索。以下是我正在或喜欢“折腾”的方向：
     </p>
     <div class="services-grid">
       <div class="service-card">
+        <span class="service-icon">🔌</span>
+        <div class="service-title">集成电路底层演进</div>
+        <p class="service-desc">
+          关注芯片设计、先进制程、先进封装与异构计算的发展趋势，寻找如何把沙子变成金子的硬核商业路径。
+        </p>
+      </div>
+      <div class="service-card">
         <span class="service-icon">🤖</span>
-        <div class="service-title">AI Infra 精准猎聘</div>
+        <div class="service-title">端侧 AI 落地探索</div>
         <p class="service-desc">
-          深度聚焦训练框架、推理引擎、MLOps、分布式存储等 AI 基础设施岗位，
-          凭借技术背景精准评估候选人真实能力，拒绝简历注水。
+          对大模型、RAG、端侧 Agent 很感兴趣。喜欢折腾在受限硬件算力下如何跑出高效、好玩的智能体验。
         </p>
       </div>
       <div class="service-card">
-        <span class="service-icon">🧠</span>
-        <div class="service-title">大模型团队搭建</div>
+        <span class="service-icon">🔎</span>
+        <div class="service-title">显微镜级尽职调查</div>
         <p class="service-desc">
-          为大模型初创公司提供从核心研究员到工程负责人的全栈团队组建服务，
-          助力团队从 0 到 1 快速成型。
+          发挥 VC 看人看事的经验，做显微镜级别的产业尽调（Due Diligence），戳破一切无脑风口和“PPT概念股”。
         </p>
       </div>
       <div class="service-card">
-        <span class="service-icon">🔬</span>
-        <div class="service-title">研究型人才寻访</div>
+        <span class="service-icon">🛠️</span>
+        <div class="service-title">各类软硬件 DIY</div>
         <p class="service-desc">
-          专注顶尖高校及研究院（清北、CMU、MIT、Google Brain 等）研究人才寻访，
-          帮助企业引进具备前沿技术能力的核心研究员。
+          喜欢动手装机、研究好玩的开源硬件、各种效率工具与小众黑科技，持续拓展自己的技能边界。
         </p>
       </div>
       <div class="service-card">
-        <span class="service-icon">💡</span>
-        <div class="service-title">技术能力评估</div>
+        <span class="service-icon">☕</span>
+        <div class="service-title">创业者与同业链接</div>
         <p class="service-desc">
-          基于工程师背景，提供超越简历的候选人技术深度评估，
-          从系统设计、代码能力、论文理解等维度综合判断，降低用人风险。
+          利用自己在 VC 和科技行业的资源，为初创团队出谋划策、梳理商业模式、对接核心人才与资金。
         </p>
       </div>
       <div class="service-card">
-        <span class="service-icon">📊</span>
-        <div class="service-title">AI 人才市场洞察</div>
+        <span class="service-icon">🤝</span>
+        <div class="service-title">纯粹的极客交友</div>
         <p class="service-desc">
-          提供 AI Infra 赛道薪酬基准、人才分布图谱及竞争对手团队结构分析，
-          助力企业制定科学的人才战略与薪酬策略。
-        </p>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">🚀</span>
-        <div class="service-title">AI 候选人职业咨询</div>
-        <p class="service-desc">
-          为 AI 工程师与研究员提供市场定位、offer 选择及职业路径规划建议，
-          结合 VC 视角判断公司成长潜力，助力做出最优决策。
+          如果你也是个“折腾家”，不管你的 idea 多么天马行空，我都愿意坐下来听听，碰撞出新的火花。
         </p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== 成功案例 ===== -->
-<section id="cases">
+<!-- ===== 我们可以聊些什么 ===== -->
+<section id="topics">
   <div class="section-inner">
-    <div class="section-tag">Success Cases</div>
-    <h2 class="section-title">专注猎聘的岗位领域</h2>
+    <div class="section-tag">Let's Chat</div>
+    <h2 class="section-title">随时找我交流这些话题</h2>
     <div class="divider"></div>
-    <p class="section-desc">深度聚焦 AI Infra 全栈，覆盖从底层系统到应用层的核心技术与管理岗位</p>
+    <p class="section-desc">不论是创业者、极客、技术研发还是 VC 同业，如果你对以下话题感兴趣，欢迎随时来聊：</p>
     <div class="cases-grid">
       <div class="case-card">
-        <span class="case-industry">AI Infra · 训练</span>
-        <div class="case-role">分布式训练工程师 / 负责人</div>
-        <div class="case-company">大模型公司 · 北京 / 上海</div>
+        <span class="case-industry">创业 &amp; VC</span>
+        <div class="case-role">商业模式梳理与融资建议</div>
+        <div class="case-company">如果你只有一个疯狂的 Idea，我可以用 VC 经验帮你做第一轮商业逻辑梳理与沙盘推演。</div>
         <div class="case-meta">
-          <span class="case-tag">PyTorch / Megatron</span>
-          <span class="case-tag">大规模集群调度</span>
+          <span class="case-tag">项目梳理</span>
+          <span class="case-tag">融资对接</span>
         </div>
       </div>
       <div class="case-card">
-        <span class="case-industry">AI Infra · 推理</span>
-        <div class="case-role">推理引擎工程师 / 架构师</div>
-        <div class="case-company">AI 芯片 / 云厂商 · 深圳 / 杭州</div>
+        <span class="case-industry">集成电路</span>
+        <div class="case-role">芯片底层软硬件与生态</div>
+        <div class="case-company">探讨半导体、EDA工具、芯片架构设计以及国产替代的真实商业动向。</div>
         <div class="case-meta">
-          <span class="case-tag">TensorRT / vLLM</span>
-          <span class="case-tag">量化 & 编译优化</span>
+          <span class="case-tag">芯片设计</span>
+          <span class="case-tag">先进封装</span>
         </div>
       </div>
       <div class="case-card">
-        <span class="case-industry">AI Infra · 系统</span>
-        <div class="case-role">AI 系统软件工程师</div>
-        <div class="case-company">AI 芯片公司 · 全国</div>
+        <span class="case-industry">AI Infra &amp; 算法</span>
+        <div class="case-role">大模型与端侧 AI 的明天</div>
+        <div class="case-company">交流算力瓶颈下，AI Infra 怎么玩才有真壁垒，以及端侧大模型的落地场景。</div>
         <div class="case-meta">
-          <span class="case-tag">Compiler / Runtime</span>
-          <span class="case-tag">CUDA / 异构计算</span>
+          <span class="case-tag">端侧 AI</span>
+          <span class="case-tag">RAG / Agent</span>
         </div>
       </div>
       <div class="case-card">
-        <span class="case-industry">大模型研究</span>
-        <div class="case-role">研究员 / 算法工程师</div>
-        <div class="case-company">顶尖 AI 实验室 · 北京 / 杭州</div>
+        <span class="case-industry">深度尽职调查</span>
+        <div class="case-role">草根调研与行业“解剖”</div>
+        <div class="case-company">分享如何通过草根调研、跟技术人员深聊去发现冰山之下的行业真相与核心壁垒。</div>
         <div class="case-meta">
-          <span class="case-tag">Pre-training / RLHF</span>
-          <span class="case-tag">顶会论文背景</span>
+          <span class="case-tag">Due Diligence</span>
+          <span class="case-tag">真实访谈</span>
         </div>
       </div>
       <div class="case-card">
-        <span class="case-industry">MLOps / 平台</span>
-        <div class="case-role">ML 平台工程师 / 负责人</div>
-        <div class="case-company">AI 独角兽 · 上海 / 深圳</div>
+        <span class="case-industry">搞怪与折腾</span>
+        <div class="case-role">好玩的软硬件折腾经验</div>
+        <div class="case-company">你最近在折腾什么？不论是开发小工具还是自制硬件，我都特别乐意听听并一起交流探讨。</div>
         <div class="case-meta">
-          <span class="case-tag">训练平台 / 数据飞轮</span>
-          <span class="case-tag">Kubernetes / 存储</span>
+          <span class="case-tag">Hardware DIY</span>
+          <span class="case-tag">开源折腾</span>
         </div>
       </div>
       <div class="case-card">
-        <span class="case-industry">AI 管理岗</span>
-        <div class="case-role">技术 VP / 工程 Director</div>
-        <div class="case-company">AI 初创 / 大厂 AI 部门 · 全国</div>
+        <span class="case-industry">纯粹交个朋友</span>
+        <div class="case-role">咖啡与茶的午后闲聊</div>
+        <div class="case-company">不扯空洞的风口，在北京、上海、深圳或杭州，约个合适的时间，纯粹交朋友、聊聊天。</div>
         <div class="case-meta">
-          <span class="case-tag">技术 + 业务双驱动</span>
-          <span class="case-tag">团队从 0 到 1</span>
+          <span class="case-tag">约杯咖啡</span>
+          <span class="case-tag">跨界碰撞</span>
         </div>
       </div>
     </div>
     <div class="cases-summary">
       <div class="summary-item">
-        <span class="summary-num">AI</span>
-        <div class="summary-label">深度垂直赛道</div>
+        <span class="summary-num">IC &amp; AI</span>
+        <div class="summary-label">深耕行业方向</div>
       </div>
       <div class="summary-item">
-        <span class="summary-num">4城</span>
-        <div class="summary-label">北上杭深覆盖</div>
+        <span class="summary-num">VC + 极客</span>
+        <div class="summary-label">跨界复合背景</div>
       </div>
       <div class="summary-item">
-        <span class="summary-num">工程师</span>
-        <div class="summary-label">技术背景评估</div>
+        <span class="summary-num">真实</span>
+        <div class="summary-label">拒绝套路寒暄</div>
       </div>
       <div class="summary-item">
-        <span class="summary-num">VC</span>
-        <div class="summary-label">投资视角加持</div>
+        <span class="summary-num">交个朋友</span>
+        <div class="summary-label">一杯咖啡的距离</div>
       </div>
     </div>
   </div>
@@ -631,15 +643,14 @@
         <h2 class="section-title">与我取得联系</h2>
         <div class="divider"></div>
         <p style="color: var(--gray-text); margin-bottom: 1.5rem;">
-          无论你是正在寻找关键人才的企业方，还是希望探索新机会的候选人，
-          欢迎与我沟通，我将在24小时内回复。
+          如果你是集成电路与 AI 领域的创业者、极客、VC 同业，欢迎与我交流，我们一起共同学习成长。
         </p>
         <ul class="contact-info-list">
           <li>
-            <div class="contact-icon">📧</div>
+            <div class="contact-icon">💬</div>
             <div class="contact-detail">
-              <strong>邮箱</strong>
-              <span>jiajunlin@feifanhexi.com</span>
+              <strong>微信 (点击直接复制)</strong>
+              <span id="wechatId" style="cursor:pointer; text-decoration:underline; font-weight:700; color:var(--gold);" onclick="copyWeChat()">jasonjiavc</span>
             </div>
           </li>
           <li>
@@ -652,7 +663,7 @@
           <li>
             <div class="contact-icon">📍</div>
             <div class="contact-detail">
-              <strong>主要服务城市</strong>
+              <strong>活跃城市</strong>
               <span>北京 · 上海 · 深圳 · 杭州</span>
             </div>
           </li>
@@ -666,41 +677,42 @@
         </ul>
       </div>
       <div class="contact-form">
-        <h3 style="margin-bottom: 1.5rem; font-size: 1.2rem;">发送消息</h3>
+        <h3 style="margin-bottom: 1.5rem; font-size: 1.2rem;">交个朋友 / 留言交流</h3>
         <form id="contactForm" onsubmit="submitForm(event)">
           <div class="form-row">
             <div class="form-group">
-              <label>姓名 *</label>
-              <input type="text" placeholder="您的姓名" required />
+              <label>如何称呼您 *</label>
+              <input type="text" placeholder="您的姓名/昵称" required />
             </div>
             <div class="form-group">
-              <label>公司</label>
-              <input type="text" placeholder="所在公司" />
+              <label>来自哪里 (公司/组织/学校)</label>
+              <input type="text" placeholder="所在公司或背景" />
             </div>
           </div>
           <div class="form-row">
             <div class="form-group">
               <label>联系方式 *</label>
-              <input type="text" placeholder="手机号 / 微信 / 邮箱" required />
+              <input type="text" placeholder="微信 / 手机号" required />
             </div>
             <div class="form-group">
-              <label>身份</label>
+              <label>您的身份</label>
               <select>
                 <option value="">请选择</option>
-                <option>企业HR / 用人方</option>
-                <option>求职候选人</option>
-                <option>其他</option>
+                <option>创业者 / Founder</option>
+                <option>技术极客 / 研发工程师</option>
+                <option>VC同业 / 投资人</option>
+                <option>其他有趣的人</option>
               </select>
             </div>
           </div>
           <div class="form-group">
-            <label>留言内容 *</label>
-            <textarea placeholder="请描述您的招聘需求或求职意向..." required></textarea>
+            <label>你想聊聊什么 *</label>
+            <textarea placeholder="无论是想找我帮项目出谋划策，还是想探讨半导体/AI技术，亦或是纯粹约咖啡，都可以在这里写下你的想法..." required></textarea>
           </div>
-          <button type="submit" class="btn-submit">提交咨询 →</button>
+          <button type="submit" class="btn-submit">发送消息交个朋友 →</button>
         </form>
         <div class="form-success" id="formSuccess">
-          ✅ 消息已发送！我将在24小时内与您联系。
+          ✅ 消息已发送！期待与您的深入交流。
         </div>
       </div>
     </div>
@@ -709,7 +721,7 @@
 
 <!-- ===== Footer ===== -->
 <footer>
-  <p>© 2026 <span>贾钧麟 · Junlin Jia</span> · AI 猎头顾问 · 保密承诺 · 专业诚信</p>
+  <p>© 2026 <span>贾钧麟 · Junlin Jia</span> · 聚焦集成电路与 AI · 保持探索，保持真实</p>
 </footer>
 
 <script>
@@ -736,6 +748,51 @@
     e.preventDefault();
     document.getElementById('contactForm').style.display = 'none';
     document.getElementById('formSuccess').style.display = 'block';
+  }
+
+  // 复制微信号功能
+  function copyWeChat() {
+    const wechatVal = 'jasonjiavc';
+    
+    // 使用新的 Clipboard API
+    navigator.clipboard.writeText(wechatVal).then(() => {
+      showToast('已复制微信号: ' + wechatVal + '，微信见！🎉');
+    }).catch(err => {
+      // 备用复制方法
+      const textArea = document.createElement('textarea');
+      textArea.value = wechatVal;
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        showToast('已复制微信号: ' + wechatVal + '，微信见！🎉');
+      } catch (e) {
+        alert('复制失败，请手动添加微信号：' + wechatVal);
+      }
+      document.body.removeChild(textArea);
+    });
+  }
+
+  // 显示提示气泡
+  function showToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'wechat-toast';
+    toast.innerText = message;
+    document.body.appendChild(toast);
+    
+    // 强制回流以触发生命周期动画
+    toast.offsetHeight;
+    
+    // 渐显和上浮
+    toast.classList.add('show');
+    
+    // 2.5秒后移除
+    setTimeout(() => {
+      toast.classList.remove('show');
+      setTimeout(() => {
+        document.body.removeChild(toast);
+      }, 300);
+    }, 2500);
   }
 
   // 滚动进场动画
