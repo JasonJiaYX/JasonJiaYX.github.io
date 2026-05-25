@@ -410,6 +410,59 @@
       opacity: 1;
       transform: translateX(-50%) translateY(0);
     }
+
+    /* ===== 联系我卡片化样式 ===== */
+    .contact-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .contact-card-item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem 1rem;
+      transition: all var(--transition);
+      cursor: default;
+    }
+    #wechatCard {
+      cursor: pointer;
+    }
+    .contact-card-item:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+      border-color: var(--gold);
+    }
+    .contact-card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+    .contact-card-title {
+      font-size: 0.82rem;
+      color: var(--gray-text);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .contact-card-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    
+    @media (max-width: 900px) {
+      .contact-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 500px) {
+      .contact-cards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
@@ -559,6 +612,7 @@
     <p class="section-desc">不论是创业者、极客、技术研发还是 VC 同业，如果你对以下话题感兴趣，欢迎随时来聊：</p>
     <div class="cases-grid">
       <div class="case-card">
+        <span class="service-icon" style="font-size: 2.5rem; margin-bottom: 1.2rem; display: block;">💡</span>
         <span class="case-industry">创业 &amp; VC</span>
         <div class="case-role">商业模式梳理与融资建议</div>
         <div class="case-company">如果你只有一个疯狂的 Idea，我可以用 VC 经验帮你做第一轮商业逻辑梳理与沙盘推演。</div>
@@ -568,6 +622,7 @@
         </div>
       </div>
       <div class="case-card">
+        <span class="service-icon" style="font-size: 2.5rem; margin-bottom: 1.2rem; display: block;">🔌</span>
         <span class="case-industry">集成电路</span>
         <div class="case-role">芯片底层软硬件与生态</div>
         <div class="case-company">探讨半导体、EDA工具、芯片架构设计以及国产替代的真实商业动向。</div>
@@ -577,6 +632,7 @@
         </div>
       </div>
       <div class="case-card">
+        <span class="service-icon" style="font-size: 2.5rem; margin-bottom: 1.2rem; display: block;">🧠</span>
         <span class="case-industry">AI Infra &amp; 算法</span>
         <div class="case-role">大模型与端侧 AI 的明天</div>
         <div class="case-company">交流算力瓶颈下，AI Infra 怎么玩才有真壁垒，以及端侧大模型的落地场景。</div>
@@ -586,6 +642,7 @@
         </div>
       </div>
       <div class="case-card">
+        <span class="service-icon" style="font-size: 2.5rem; margin-bottom: 1.2rem; display: block;">🔎</span>
         <span class="case-industry">深度尽职调查</span>
         <div class="case-role">草根调研与行业“解剖”</div>
         <div class="case-company">分享如何通过草根调研、跟技术人员深聊去发现冰山之下的行业真相与核心壁垒。</div>
@@ -595,6 +652,7 @@
         </div>
       </div>
       <div class="case-card">
+        <span class="service-icon" style="font-size: 2.5rem; margin-bottom: 1.2rem; display: block;">🛠️</span>
         <span class="case-industry">搞怪与折腾</span>
         <div class="case-role">好玩的软硬件折腾经验</div>
         <div class="case-company">你最近在折腾什么？不论是开发小工具还是自制硬件，我都特别乐意听听并一起交流探讨。</div>
@@ -604,6 +662,7 @@
         </div>
       </div>
       <div class="case-card">
+        <span class="service-icon" style="font-size: 2.5rem; margin-bottom: 1.2rem; display: block;">🤝</span>
         <span class="case-industry">纯粹交个朋友</span>
         <div class="case-role">咖啡与茶的午后闲聊</div>
         <div class="case-company">不扯空洞的风口，在北京、上海、深圳或杭州，约个合适的时间，纯粹交朋友、聊聊天。</div>
@@ -636,84 +695,39 @@
 
 <!-- ===== 联系我 ===== -->
 <section id="contact">
-  <div class="section-inner">
-    <div class="contact-grid">
-      <div>
-        <div class="section-tag">Contact</div>
-        <h2 class="section-title">与我取得联系</h2>
-        <div class="divider"></div>
-        <p style="color: var(--gray-text); margin-bottom: 1.5rem;">
-          如果你是集成电路与 AI 领域的创业者、极客、VC 同业，欢迎与我交流，我们一起共同学习成长。
-        </p>
-        <ul class="contact-info-list">
-          <li>
-            <div class="contact-icon">💬</div>
-            <div class="contact-detail">
-              <strong>微信 (点击直接复制)</strong>
-              <span id="wechatId" style="cursor:pointer; text-decoration:underline; font-weight:700; color:var(--gold);" onclick="copyWeChat()">jasonjiavc</span>
-            </div>
-          </li>
-          <li>
-            <div class="contact-icon">📱</div>
-            <div class="contact-detail">
-              <strong>电话</strong>
-              <span>+86 133-0124-1381</span>
-            </div>
-          </li>
-          <li>
-            <div class="contact-icon">📍</div>
-            <div class="contact-detail">
-              <strong>活跃城市</strong>
-              <span>北京 · 上海 · 深圳 · 杭州</span>
-            </div>
-          </li>
-          <li>
-            <div class="contact-icon">💼</div>
-            <div class="contact-detail">
-              <strong>领英</strong>
-              <span><a href="https://www.linkedin.com/in/junlin-jia/" target="_blank" style="color:var(--navy);text-decoration:underline;">linkedin.com/in/junlin-jia</a></span>
-            </div>
-          </li>
-        </ul>
+  <div class="section-inner" style="text-align: center;">
+    <div class="section-tag">Contact</div>
+    <h2 class="section-title">与我取得联系</h2>
+    <div class="divider" style="margin: 1rem auto 1.5rem;"></div>
+    <p class="section-desc" style="margin: 0 auto 3rem; max-width: 600px;">
+      如果你是集成电路与 AI 领域的创业者、极客、VC 同业，欢迎与我交流，我们一起共同学习成长。
+    </p>
+    
+    <div class="contact-cards-grid">
+      <div class="contact-card-item" id="wechatCard" onclick="copyWeChat()">
+        <div class="contact-card-icon">💬</div>
+        <div class="contact-card-title">微信 (点击复制)</div>
+        <div class="contact-card-value">jasonjiavc</div>
       </div>
-      <div class="contact-form">
-        <h3 style="margin-bottom: 1.5rem; font-size: 1.2rem;">交个朋友 / 留言交流</h3>
-        <form id="contactForm" onsubmit="submitForm(event)">
-          <div class="form-row">
-            <div class="form-group">
-              <label>如何称呼您 *</label>
-              <input type="text" placeholder="您的姓名/昵称" required />
-            </div>
-            <div class="form-group">
-              <label>来自哪里 (公司/组织/学校)</label>
-              <input type="text" placeholder="所在公司或背景" />
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>联系方式 *</label>
-              <input type="text" placeholder="微信 / 手机号" required />
-            </div>
-            <div class="form-group">
-              <label>您的身份</label>
-              <select>
-                <option value="">请选择</option>
-                <option>创业者 / Founder</option>
-                <option>技术极客 / 研发工程师</option>
-                <option>VC同业 / 投资人</option>
-                <option>其他有趣的人</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>你想聊聊什么 *</label>
-            <textarea placeholder="无论是想找我帮项目出谋划策，还是想探讨半导体/AI技术，亦或是纯粹约咖啡，都可以在这里写下你的想法..." required></textarea>
-          </div>
-          <button type="submit" class="btn-submit">发送消息交个朋友 →</button>
-        </form>
-        <div class="form-success" id="formSuccess">
-          ✅ 消息已发送！期待与您的深入交流。
-        </div>
+      
+      <div class="contact-card-item">
+        <div class="contact-card-icon">📱</div>
+        <div class="contact-card-title">电话</div>
+        <div class="contact-card-value">+86 133-0124-1381</div>
+      </div>
+      
+      <div class="contact-card-item">
+        <div class="contact-card-icon">📍</div>
+        <div class="contact-card-title">活跃城市</div>
+        <div class="contact-card-value">北京 · 上海 · 深圳 · 杭州</div>
+      </div>
+      
+      <div class="contact-card-item">
+        <a href="https://www.linkedin.com/in/junlin-jia/" target="_blank" style="display:block; text-decoration:none; color:inherit;">
+          <div class="contact-card-icon">💼</div>
+          <div class="contact-card-title">领英 (LinkedIn)</div>
+          <div class="contact-card-value">点击访问主页</div>
+        </a>
       </div>
     </div>
   </div>
@@ -742,13 +756,6 @@
       document.getElementById('navLinks').classList.remove('open');
     });
   });
-
-  // 表单提交模拟
-  function submitForm(e) {
-    e.preventDefault();
-    document.getElementById('contactForm').style.display = 'none';
-    document.getElementById('formSuccess').style.display = 'block';
-  }
 
   // 复制微信号功能
   function copyWeChat() {
@@ -805,7 +812,7 @@
     });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll('.service-card, .case-card, .about-content, .contact-form').forEach(el => {
+  document.querySelectorAll('.service-card, .case-card, .about-content, .contact-card-item').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(24px)';
     el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
